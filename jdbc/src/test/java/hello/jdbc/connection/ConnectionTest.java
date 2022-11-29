@@ -31,7 +31,7 @@ public class ConnectionTest {
     }
 
     @Test
-    void dataSourceConnectionPool() throws SQLException {
+    void dataSourceConnectionPool() throws SQLException, InterruptedException {
         // 커넥션 풀링
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(URL);
@@ -41,11 +41,17 @@ public class ConnectionTest {
         dataSource.setPoolName("MyPool");
 
         useDataSource(dataSource);
+        Thread.sleep(1000);
     }
 
     private void useDataSource(DataSource dataSource) throws SQLException {
         Connection con1 = dataSource.getConnection();
         Connection con2 = dataSource.getConnection();
+        Connection con3 = dataSource.getConnection();
+        Connection con4 = dataSource.getConnection();
+        Connection con5 = dataSource.getConnection();
+        con1.close();
+        Connection con6 = dataSource.getConnection();
         log.info("connection={}, class={}", con1, con1.getClass());
         log.info("connection={}, class={}", con2, con2.getClass());
     }
