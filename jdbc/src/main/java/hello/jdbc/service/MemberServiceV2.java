@@ -32,8 +32,6 @@ public class MemberServiceV2 {
         } finally {
             release(con);
         }
-
-
     }
 
     private void bizLogic(Connection con, String fromId, String toId, int money) throws SQLException {
